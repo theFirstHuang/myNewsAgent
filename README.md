@@ -228,15 +228,6 @@ processing:
 
 ---
 
-## 💰 Cost Estimation
-
-Using GPT-4o-mini:
-- **30 papers processed**: ~$1-5 per run
-- **Relevance analysis**: ~$0.01-0.03/paper
-- **Summary generation**: ~$0.05-0.15/paper
-
----
-
 ## 🛠️ Advanced
 
 ### Use Claude Instead
