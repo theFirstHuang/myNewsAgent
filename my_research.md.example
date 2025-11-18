@@ -1,0 +1,88 @@
+# My Research Interests
+
+> **Instructions**: Copy this file to `my_research.md` and edit to match your actual research interests.
+> The agent will use this to filter and rank papers based on relevance.
+
+## Primary Research Areas
+
+### Large Language Models (LLMs)
+I'm particularly interested in:
+- **Model Architecture**: Novel attention mechanisms, efficient transformers, mixture-of-experts
+- **Training Methodology**: RLHF, DPO, Constitutional AI, preference learning
+- **Scaling Laws**: Understanding emergent abilities, compute-optimal training
+- **Model Compression**: Quantization, pruning, knowledge distillation
+
+### Natural Language Processing
+- **Multilingual Models**: Cross-lingual transfer, low-resource languages
+- **Text Generation**: Controllable generation, style transfer, factuality
+- **Dialogue Systems**: Multi-turn reasoning, context tracking
+- **Information Extraction**: Named entity recognition, relation extraction
+
+### Machine Learning Efficiency
+- **Parameter-Efficient Fine-Tuning**: LoRA, QLoRA, Adapter methods
+- **Inference Optimization**: Model quantization, speculative decoding
+- **Edge AI**: On-device deployment, mobile LLMs
+
+## Specific Topics of High Interest
+
+1. **Retrieval-Augmented Generation (RAG)**
+   - Vector databases and embeddings
+   - Hybrid retrieval methods
+   - Long-context modeling
+
+2. **In-Context Learning**
+   - Few-shot and zero-shot learning
+   - Prompt engineering techniques
+   - Chain-of-thought reasoning
+
+3. **AI Safety & Alignment**
+   - Bias detection and mitigation
+   - Jailbreak防御
+   - Value alignment
+
+4. **Multimodal Models**
+   - Vision-language models (CLIP, Flamingo, GPT-4V)
+   - Audio-language models
+   - Cross-modal reasoning
+
+5. **Code Generation**
+   - Program synthesis
+   - Code understanding and debugging
+   - Test generation
+
+## Research Methodologies I Value
+
+- **Empirical Analysis**: Strong experimental validation
+- **Theoretical Foundations**: Mathematical rigor in explanations
+- **Reproducibility**: Open-source code and datasets
+- **Real-world Applications**: Practical use cases
+
+## Keywords for Filtering
+
+LLM, Large Language Model, GPT, BERT, Transformer, T5, Llama, Mistral,
+Fine-tuning, RLHF, DPO, In-context Learning, Few-shot, Zero-shot,
+Prompt Engineering, Chain-of-Thought, RAG, Retrieval,
+Quantization, LoRA, QLoRA, Adapter, PEFT,
+Multimodal, Vision-Language, CLIP, Flamingo,
+AI Safety, Alignment, Bias, Fairness,
+Code Generation, Program Synthesis,
+Efficiency, Compression, Pruning, Distillation,
+Multilingual, Cross-lingual, Translation
+
+## Papers I DON'T Want
+
+- Pure theoretical math (unless directly applicable to LLMs)
+- Computer vision-only papers (without language component)
+- Hardware/chip design (unless about AI accelerators)
+- Quantum computing (unless quantum ML)
+
+## My Current Projects
+
+Currently working on:
+1. Improving RAG systems for technical documentation
+2. Efficient fine-tuning of 7B-13B models on consumer hardware
+3. Multilingual chatbot with cultural awareness
+
+---
+
+**Note**: Be as specific as possible! The more detail you provide, the better the agent can filter papers for you.

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Research Digest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header .date-range {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .paper-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .paper-card:hover {
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .paper-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .paper-authors {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 12px;
+        }
+
+        .paper-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .meta-badge {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .relevance-high {
+            background: #48bb78;
+            color: white;
+        }
+
+        .paper-abstract {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .paper-summary {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #2d3748;
+        }
+
+        .summary-section {
+            margin-bottom: 12px;
+        }
+
+        .summary-heading {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 6px;
+        }
+
+        .key-points {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .key-points li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .footer {
+            background: #f7fafc;
+            padding: 30px;
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🤖 LLM Research Digest</h1>
+            <div class="date-range">{{ date_range }}</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">{{ total_papers }}</div>
+                    <div class="stat-label">Papers Found</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ relevant_papers }}</div>
+                    <div class="stat-label">Highly Relevant</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Quick Overview Section -->
+            <h2 class="section-title">📋 Quick Overview</h2>
+            {% for paper in papers[:5] %}
+            <div class="paper-card">
+                <div class="paper-title">{{ paper.title }}</div>
+                <div class="paper-authors">{{ paper.authors }}</div>
+                <div class="paper-meta">
+                    <span class="meta-badge {% if paper.relevance_score >= 0.8 %}relevance-high{% endif %}">
+                        Relevance: {{ (paper.relevance_score * 100)|int }}%
+                    </span>
+                    <span class="meta-badge">{{ paper.category }}</span>
+                    <span class="meta-badge">{{ paper.date }}</span>
+                </div>
+                <div class="paper-abstract">{{ paper.abstract[:300] }}...</div>
+                <div class="links">
+                    <a href="{{ paper.arxiv_url }}" class="btn btn-primary">Read on arXiv</a>
+                    <a href="{{ paper.pdf_url }}" class="btn btn-secondary">Download PDF</a>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Detailed Summaries Section -->
+            <h2 class="section-title">📚 Detailed Analysis</h2>
+            {% for paper in papers %}
+            <div class="paper-card">
+                <div class="paper-title">{{ paper.title }}</div>
+                <div class="paper-authors">{{ paper.authors }}</div>
+                <div class="paper-meta">
+                    <span class="meta-badge {% if paper.relevance_score >= 0.8 %}relevance-high{% endif %}">
+                        Relevance: {{ (paper.relevance_score * 100)|int }}%
+                    </span>
+                    <span class="meta-badge">{{ paper.category }}</span>
+                </div>
+
+                {% if paper.summary %}
+                <div class="paper-summary">
+                    <div class="summary-section">
+                        <div class="summary-heading">🎯 Key Contributions</div>
+                        <ul class="key-points">
+                            {% for point in paper.summary.key_points %}
+                            <li>{{ point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="summary-heading">🔬 Methodology</div>
+                        <p>{{ paper.summary.methodology }}</p>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="summary-heading">💡 Why It's Relevant to You</div>
+                        <p>{{ paper.summary.relevance_reason }}</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="links">
+                    <a href="{{ paper.arxiv_url }}" class="btn btn-primary">Read Paper</a>
+                    <a href="{{ paper.pdf_url }}" class="btn btn-secondary">Download PDF</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Generated by LLM News Digest Agent</p>
+            <p style="margin-top: 8px; font-size: 13px;">
+                📎 <strong>Zotero Import:</strong> RIS file attached to this email
+            </p>
+            <div class="footer-links">
+                <a href="#">View in Browser</a>
+                <a href="#">Preferences</a>
+                <a href="#">Unsubscribe</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

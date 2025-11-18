@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Research Digest - Academic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: #f5f5f0;
+            padding: 20px;
+            line-height: 1.8;
+            color: #2c2c2c;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #d0d0d0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: #2c2c2c;
+            color: white;
+            padding: 30px 40px;
+            border-bottom: 4px solid #8b0000;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .issue-info {
+            background: #f9f9f9;
+            padding: 15px 40px;
+            border-bottom: 1px solid #d0d0d0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .issue-info strong {
+            color: #2c2c2c;
+        }
+
+        .content {
+            padding: 35px 40px;
+        }
+
+        .toc {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+
+        .toc-title {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #d0d0d0;
+        }
+
+        .toc-list li:last-child {
+            border-bottom: none;
+        }
+
+        .toc-list a {
+            color: #8b0000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 40px 0 25px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2c2c2c;
+            color: #2c2c2c;
+        }
+
+        .article {
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .article:last-child {
+            border-bottom: none;
+        }
+
+        .article-number {
+            font-size: 12px;
+            color: #999;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .article-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .article-authors {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .article-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .article-meta span {
+            margin-right: 15px;
+        }
+
+        .article-abstract {
+            font-size: 15px;
+            color: #4a4a4a;
+            text-align: justify;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .article-summary {
+            background: #f9f9f9;
+            border-left: 3px solid #8b0000;
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+
+        .summary-content {
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+
+        .summary-content h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+        }
+
+        .summary-content ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .summary-content li {
+            margin-bottom: 6px;
+        }
+
+        .article-links {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .article-links a {
+            color: #8b0000;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .article-links a:hover {
+            text-decoration: underline;
+        }
+
+        .relevance-indicator {
+            display: inline-block;
+            background: #2c2c2c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .relevance-high {
+            background: #8b0000;
+        }
+
+        .footer {
+            background: #2c2c2c;
+            color: #ccc;
+            padding: 25px 40px;
+            font-size: 12px;
+            text-align: center;
+            border-top: 4px solid #8b0000;
+        }
+
+        .footer-note {
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        hr.ornament {
+            border: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        hr.ornament:before {
+            content: "❧";
+            font-size: 20px;
+            color: #8b0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>LLM Research Digest</h1>
+            <div class="subtitle">A Curated Review of Recent Advances in Large Language Models</div>
+        </div>
+
+        <!-- Issue Info -->
+        <div class="issue-info">
+            <strong>Period:</strong> {{ date_range }} |
+            <strong>Total Papers:</strong> {{ total_papers }} |
+            <strong>Highly Relevant:</strong> {{ relevant_papers }}
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <div class="toc-title">Contents</div>
+                <ol class="toc-list">
+                    {% for paper in papers %}
+                    <li>
+                        <a href="#paper-{{ loop.index }}">{{ paper.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+            <!-- Papers Section -->
+            <h2 class="section-header">Featured Articles</h2>
+
+            {% for paper in papers %}
+            <article class="article" id="paper-{{ loop.index }}">
+                <div class="article-number">Article {{ loop.index }}</div>
+                <h3 class="article-title">{{ paper.title }}</h3>
+                <div class="article-authors">{{ paper.authors }}</div>
+                <div class="article-meta">
+                    <span><strong>Category:</strong> {{ paper.category }}</span>
+                    <span><strong>Published:</strong> {{ paper.date }}</span>
+                    <span><strong>arXiv ID:</strong> {{ paper.arxiv_id }}</span>
+                    <span class="relevance-indicator {% if paper.relevance_score >= 0.8 %}relevance-high{% endif %}">
+                        Relevance: {{ (paper.relevance_score * 100)|int }}%
+                    </span>
+                </div>
+
+                <div class="article-abstract">
+                    <strong>Abstract:</strong> {{ paper.abstract }}
+                </div>
+
+                {% if paper.summary %}
+                <div class="article-summary">
+                    <div class="summary-label">Expert Analysis</div>
+                    <div class="summary-content">
+                        <h4>Key Findings</h4>
+                        <ul>
+                            {% for point in paper.summary.key_points %}
+                            <li>{{ point }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <h4>Methodology</h4>
+                        <p>{{ paper.summary.methodology }}</p>
+
+                        <h4>Relevance to Your Research</h4>
+                        <p>{{ paper.summary.relevance_reason }}</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="article-links">
+                    <a href="{{ paper.arxiv_url }}">→ Read Full Paper</a>
+                    <a href="{{ paper.pdf_url }}">→ Download PDF</a>
+                </div>
+            </article>
+
+            {% if not loop.last %}
+            <hr class="ornament">
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-note">
+                Generated by LLM News Digest Agent<br>
+                RIS bibliography file attached for Zotero import
+            </div>
+            <div class="footer-links">
+                <a href="#">Archive</a> |
+                <a href="#">Settings</a> |
+                <a href="#">Subscribe</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

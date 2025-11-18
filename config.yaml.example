@@ -1,0 +1,123 @@
+# ========================================
+# LLM News Digest Agent - Configuration
+# ========================================
+#
+# Copy this file to config.yaml and customize to your needs
+
+# Your Research Profile
+research_profile:
+  # Path to markdown file describing your research interests
+  profile_file: "my_research.md"
+
+# Data Sources Configuration
+sources:
+  # arXiv API
+  arxiv:
+    enabled: true
+    categories:
+      - "cs.CL"  # Computation and Language
+      - "cs.AI"  # Artificial Intelligence
+      - "cs.LG"  # Machine Learning
+    max_results: 30  # Papers to fetch per category
+    days_lookback: 7  # Only papers from last N days
+
+  # HuggingFace Daily Papers
+  huggingface:
+    enabled: true
+    url: "https://huggingface.co/papers"
+    max_results: 15
+
+  # Papers with Code (optional)
+  papers_with_code:
+    enabled: false
+    rss_url: "https://paperswithcode.com/latest"
+    max_results: 10
+
+# LLM API Configuration
+llm:
+  provider: "openai"  # Options: openai, anthropic
+  model: "gpt-4o-mini"  # gpt-4o-mini is fast and cheap
+  api_key_env: "OPENAI_API_KEY"  # Environment variable name
+  temperature: 0.3  # Lower = more focused
+  max_tokens: 3000  # Max tokens per summary
+
+  # Alternative: Claude (more expensive but better at long documents)
+  # provider: "anthropic"
+  # model: "claude-3-5-sonnet-20241022"
+  # api_key_env: "ANTHROPIC_API_KEY"
+
+# Email Configuration
+email:
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  sender_email: "your-email@gmail.com"
+  sender_password_env: "GMAIL_APP_PASSWORD"  # From .env
+  recipient_email: "your-email@gmail.com"  # Can be different
+  subject_prefix: "[LLM Digest]"
+
+  # HTML Template Selection
+  template: "modern"  # Options: modern, academic, minimal
+
+# PDF Processing
+processing:
+  # Paper filtering thresholds
+  relevance_threshold: 0.7  # 0-1, filter papers below this score
+  max_papers_to_process: 10  # Limit detailed summaries (cost control)
+
+  # MinerU PDF to Markdown
+  pdf_to_markdown:
+    enabled: true
+    method: "auto"  # auto, ocr, txt
+    parse_images: false  # Extract images from PDFs
+    parse_tables: true   # Extract tables as HTML
+
+  # Output options
+  generate_ris: true  # For Zotero import
+  save_markdown: true  # Save converted papers
+  save_summaries: true  # Save LLM summaries
+
+# Scheduling (for cron/automated runs)
+schedule:
+  frequency: "weekly"  # Options: daily, weekly, custom
+
+  # For weekly
+  day_of_week: "monday"  # monday-sunday
+  time: "09:00"  # 24-hour format
+
+  # For daily
+  # time: "09:00"
+
+  # For custom (advanced users - cron syntax)
+  # cron: "0 9 * * 1"  # Every Monday at 9 AM
+
+# Directory Structure
+directories:
+  data: "data"
+  papers: "data/papers"
+  markdown: "data/markdown"
+  cache: "data/cache"
+  outputs: "outputs"
+  reports: "outputs/reports"
+  zotero: "outputs/zotero"
+  logs: "logs"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "detailed"  # simple, detailed
+  file: "logs/digest.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+
+# Performance
+performance:
+  parallel_downloads: 5  # Concurrent PDF downloads
+  request_timeout: 30  # Seconds
+  retry_attempts: 3
+  retry_delay: 2  # Seconds
+
+# Cache Settings
+cache:
+  enabled: true
+  ttl_days: 7  # Cache papers for N days
+  clean_on_start: false
